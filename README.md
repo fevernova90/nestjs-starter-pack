@@ -8,6 +8,11 @@ This starter pack includes:
 - Husky and lint-staged for pre-commit hook
 - Docker ready
 
+## Getting the template
+```bash
+npx degit https://github.com/fevernova90/nestjs-starter-pack your-app-name
+```
+
 ## Installation
 
 ```bash
