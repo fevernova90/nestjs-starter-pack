@@ -1,19 +1,6 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import * as apm from 'elastic-apm-node';
-if (process.env.NODE_ENV === 'production') {
-  const { ELASTIC_APM_SECRET_TOKEN, ELASTIC_APM_SERVER_URL } = process.env;
-  if (!ELASTIC_APM_SECRET_TOKEN || !ELASTIC_APM_SERVER_URL) {
-    console.warn(
-      'ELASTIC APM envs variabled not available, skipping APM start ...',
-    );
-  } else {
-    apm.start();
-    console.log('Elastic APM Agent started ...');
-  }
-}
-
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
