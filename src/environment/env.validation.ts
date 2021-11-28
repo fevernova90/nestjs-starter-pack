@@ -37,7 +37,6 @@ export class EnvironmentVariables {
   API_VERSION?: string;
 
   @IsString()
-  @IsUrl()
   SERVER_URL: string;
 
   @IsString()
