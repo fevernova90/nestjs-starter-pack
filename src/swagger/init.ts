@@ -14,6 +14,8 @@ interface InitSwaggerArgs {
   apiVersion: string;
   serverUrl: string;
   hostDoc?: boolean;
+  docTitle?: string;
+  docRoute?: string;
   produceSpecFile?: boolean;
 }
 
@@ -24,26 +26,28 @@ export function initSwagger({
   appName,
   apiVersion = 'v1.0',
   hostDoc = true,
+  docTitle = 'API Documentation',
+  docRoute = 'doc',
   produceSpecFile = false,
 }: InitSwaggerArgs) {
   const swaggerDocConfig = new DocumentBuilder()
-    .setTitle('ChatEmbed Client API')
+    .setTitle(docTitle)
     .setDescription(
       `Endpoints to be consumed by ${appName} authenticated clients.`,
     )
     .setVersion(apiVersion)
     .addServer(serverUrl, 'Live server')
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        name: 'JWT',
-        description: 'Enter access_token that you get from /auth/login.',
-        in: 'header',
-      },
-      'user',
-    )
+//     .addBearerAuth(
+//       {
+//         type: 'http',
+//         scheme: 'bearer',
+//         bearerFormat: 'JWT',
+//         name: 'JWT',
+//         description: 'Enter access_token that you get from /auth/login.',
+//         in: 'header',
+//       },
+//       'user',
+//     )
     .build();
 
   const swaggerDocOptions: SwaggerDocumentOptions = {
@@ -84,6 +88,6 @@ export function initSwagger({
   }
   // Host the spec
   if (hostDoc) {
-    SwaggerModule.setup('api', app, document, swaggerCustomOptions);
+    SwaggerModule.setup(docRoute, app, document, swaggerCustomOptions);
   }
 }
