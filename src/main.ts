@@ -83,7 +83,15 @@ async function bootstrap() {
   // app.enableCors();
 
   // Init Openapi Doc server (Swagger) and/or api spec file
-  initSwagger({ app, serverUrl, hostDoc: true, produceSpecFile: false });
+  initSwagger({ app,
+               serverUrl,
+               hostDoc: true,
+               docTitle: 'API Documentation',
+               docRoute: '/api/docs',
+               produceSpecFile: false,
+               appName: configService.get('APP_NAME', 'NestJS App') ,
+               apiVersion: configService.get('API_VERSION', '1.0.0', { infer: true }),
+              });
 
   // Server start (binding to 0.0.0.0 for Docker as Fastify defaulted to 127.0.0.1)
   await app.listen(port, '0.0.0.0', () => {
